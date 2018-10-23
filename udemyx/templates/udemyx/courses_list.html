@@ -1,0 +1,34 @@
+{% extends 'udemyx/udemyx.html' %}
+
+
+{% block col1 %}
+  <ul>
+  <li {% if not category %}class="selected"{% endif %}>
+    <a href="{% url "udemyx:categories" %}">All Courses</a>
+  </li>
+
+  {% for c in categories %}
+    <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+      <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+{% endblock %}
+
+
+{% block content %}
+
+    <strong>{% if category %}{{ category.name }}{% else %}Courses{% endif %}</strong>
+
+    {% for course in courses %}
+      <div class="item">
+        <a href= "{{ course.get_absolute_url }}">      
+        {{ course.title }}
+        | {{ course.author }}
+      </p>
+      </div>
+    {% endfor %}
+  </div>
+
+
+{% endblock %}
